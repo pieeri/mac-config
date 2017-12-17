@@ -1,0 +1,9 @@
+[user]
+	name =
+	email =
+[credential]
+	helper = osxkeychain
+[branch]
+	autosetuprebase = always
+[push]
+	default = simple
