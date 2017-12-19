@@ -13,8 +13,6 @@
 - [Postman](https://www.getpostman.com)
 
 ### Productivity
-- [Skype](https://www.skype.com/fr/download-skype/skype-for-mac)
-- [OpenOffice](https://www.openoffice.org/download/index.html)
 - [1Password](https://1password.com/downloads)
 - [Slack](https://slack.com/downloads/osx)
 - [Dropbox](https://www.dropbox.com/downloading)
@@ -55,7 +53,9 @@ Launch terminal and execute:
 
 In `$PATH`, make sure `/usr/local/bin` is before `/usr/bin`:
 
-	$ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+```sh
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+```
 
 ### Library dependencies
 
@@ -72,7 +72,7 @@ Install via Homebrew,
 
 Add into allowed shells and make `zsh` as defaut:
 
-    $ echo $(which zsh) > /etc/shells
+    $ sudo echo $(which zsh) > /etc/shells
     $ chsh -s $(which zsh)
 
 To switch back to `bash`,
@@ -123,7 +123,9 @@ Use Homebrew to install `Python2`:
 To [override MacOS](https://docs.brew.sh/Homebrew-and-Python.html) Python exec,
 append `$PATH` such as:
 
-    $ export PATH=/usr/local/opt/python/libexec/bin:$PATH
+```sh
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+```
 
 Use Homebrew to install `Python3`:
 
@@ -182,11 +184,19 @@ Install [PostgreSQL](https://www.postgresql.org/download/macosx) via the MAC ins
 
 And add its executables to the `$PATH` by adding the following to your `~/.bash_profile`:
 
-    $ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+```sh
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+```
 
 Start Postgres and initialise through the GUI.
 
 # Lastly... cheatsheet!
+
+### Remove Homebrew packages
+To remove a package and all of its dependencies recursively,
+
+    $ brew tap ggpeti/rmrec
+    $ brew rmrec <pkgname>
 
 ### Reset distribution packages
 Reset Python distributions globally,
@@ -205,4 +215,5 @@ Install Python3.6.1 distribution via Pyenv,
 Install Anaconda3 distribution via Pyenv,
 
     $ pyenv install anaconda3-5.0.0
+    $ pyenv global anaconda3-5.0.0
     $ conda list
