@@ -217,3 +217,18 @@ Install Anaconda3 distribution via Pyenv,
     $ pyenv install anaconda3-5.0.0
     $ pyenv global anaconda3-5.0.0
     $ conda list
+
+### Autoreload iPython shell
+Install iPython and create a config file,
+
+    $ ipython profile create
+
+Then edit `~/.config/ipython/profile_default/ipython_config.py` and add,
+
+```python
+c.InteractiveShellApp.extensions = ['autoreload']
+c.InteractiveShellApp.exec_lines = ['%autoreload 2']
+c.InteractiveShellApp.exec_lines.append(
+    'print("Warning: disable autoreload to improve performance.")'
+)
+```
