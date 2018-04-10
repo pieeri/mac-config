@@ -198,6 +198,11 @@ To remove a package and all of its dependencies recursively,
     $ brew tap ggpeti/rmrec
     $ brew rmrec <pkgname>
 
+### CLI for FTP/Telnet servers
+[FTP CLI](https://docs.oracle.com/cd/E19120-01/open.solaris/819-1634/remotehowtoaccess-87541/index.html) removed on High Sierral,
+
+    $ brew install inetutils
+
 ### Reset distribution packages
 Reset Python distributions globally,
 
