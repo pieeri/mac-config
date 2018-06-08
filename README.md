@@ -237,3 +237,19 @@ c.InteractiveShellApp.exec_lines.append(
     'print("Warning: disable autoreload to improve performance.")'
 )
 ```
+
+### Django Shell_plus extension into PyCharm
+Enable Django support in Languages & Frameworks > Django,
+
+Then add the the following starting script in Build, Execution, Deployment > Django Console,
+
+```python
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+import django; print('Django %s' % django.get_version())
+sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])
+if 'setup' in dir(django): django.setup()
+import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)
+from django_extensions.management.shells import import_objects
+from django.core.management.color import no_style
+globals().update(import_objects({"dont_load":[], "quiet_load":False},no_style()))
+```
