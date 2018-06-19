@@ -203,6 +203,16 @@ To remove a package and all of its dependencies recursively,
 
     $ brew install inetutils
 
+### Tmux CLI
+To detach remote SSH connections from active terminal window (and avoid broken pipes),
+
+    $ brew install tmux
+
+Bespoke config file `.tmux.conf` into `$HOME` directory:
+
+* remap prefix from 'C-b' to 'C-a'
+* start window numbering at 1
+
 ### Reset distribution packages
 Reset Python distributions globally,
 
