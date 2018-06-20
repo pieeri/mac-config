@@ -5,7 +5,6 @@
 ### Engineering
 - [Sublime3](https://www.sublimetext.com/3)
 - [PyCharm](https://www.jetbrains.com/toolbox/app)
-- [Anaconda](https://www.continuum.io/downloads) (alternative with Pyenv)
 - [MySQLWorkBench](https://dev.mysql.com/downloads/workbench)
 - [pgAdmin](https://www.pgadmin.org/download)
 - [Filezilla](https://filezilla-project.org/download.php?type=client)
@@ -143,7 +142,7 @@ Now install `virtualenv` and `virtualenvwrapper` globally:
 	$ pip3 install -U virtualenv virtualenvwrapper
 	$ makedir -p $HOME/.pyenv
 
-### Install [Pyenv]((https://github.com/pyenv/pyenv-virtualenvwrapper))
+### Install [Pyenv](https://github.com/pyenv/pyenv-virtualenvwrapper)
 To get Pyenv installed:
 
 	$ brew install pyenv pyenv-virtualenvwrapper
@@ -157,6 +156,18 @@ eval "$(pyenv init -)"
 export WORKON_HOME=$HOME/.pyenv
 # Via pyenv-virtualenvwrapper
 eval "pyenv virtualenvwrapper"
+```
+
+### Install [Pipenv](https://github.com/pypa/pipenv)
+To get Pipenv installed:
+
+    $ brew install pipenv
+
+And make sure to add the following into your `~/.zshrc` or `~/.bash_profile`:
+
+```sh
+# Pipenv
+eval "$(pipenv --completion)"
 ```
 
 ### Other dependencies for PyPi packages
