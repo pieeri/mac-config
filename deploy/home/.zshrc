@@ -5,6 +5,8 @@ plugins=(osx brew git docker pyenv python pip django zsh-syntax-highlighting)
 ## Installation
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+## Clear
+cat /dev/null > ~/.zsh_history
 ## Alias
 alias zshconfig="subl ~/.zshrc"
 
@@ -16,21 +18,14 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # PYTHON
 ## Pyenv
-export WORKON_HOME=$HOME/.pyenv
 eval "$(pyenv init -)"
-## Venv via pyenv-virtualenvwrapper
+## Virtualenvwrapper
+export WORKON_HOME=$HOME/.pyenv
+## Pyenv-virtualenvwrapper
 eval "pyenv virtualenvwrapper"
-## Venv via pipenv
-eval "$(pipenv --completion)"
 
 # SUBLIME
 export EDITOR='subl_wait'
 
-# CLEAR
-## Last login
-touch ~/.hushlogin
-## Zsh history
-cat /dev/null > ~/.zsh_history
-
 # SUCCESS
-echo $HOME: customed profile has loaded...
+echo $HOME: customed zsh profile loaded...
