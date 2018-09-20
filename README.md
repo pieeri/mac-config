@@ -274,3 +274,9 @@ from django_extensions.management.shells import import_objects
 from django.core.management.color import no_style
 globals().update(import_objects({"dont_load":[], "quiet_load":False},no_style()))
 ```
+
+### Install Vagrant via HomeBrew
+To install Virtualbox and Vagrant through Homebrew,
+
+    $ brew cask install virtualbox
+    $ brew cask install vagrant
