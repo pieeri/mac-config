@@ -101,6 +101,7 @@ Make custom exec into `/usr/local/bin`:
 - [Orgmode](https://packagecontrol.io/packages/orgmode)
 - [Docker](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting)
 
+
 ## Python2 / Python3
 
 ### Install C compilers
@@ -173,6 +174,21 @@ eval "$(pipenv --completion)"
 ### Other dependencies for PyPi packages
 
 	$ brew install qt4 pyqt zmq libyaml
+
+
+## Ruby
+
+### Install [Rbenv](https://github.com/rbenv/rbenv)
+To get Rbenv installed:
+
+    $ brew install rbenv
+
+And make sure to add the following into your `~/.zshrc` or `~/.bash_profile`:
+
+```sh
+# Rbenv
+eval "$(rbenv init -)"
+```
 
 ## Databases
 

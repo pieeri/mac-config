@@ -24,6 +24,10 @@ export WORKON_HOME=$HOME/.pyenv
 ## Pyenv-virtualenvwrapper
 eval "pyenv virtualenvwrapper"
 
+# RUBY
+## Rbenv
+eval "$(rbenv init -)"
+
 # SUBLIME
 export EDITOR='subl_wait'
 
