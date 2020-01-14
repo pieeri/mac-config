@@ -1,60 +1,53 @@
-# Global Mac Setup
+# MyMac Setup
 
-## Mac configuration
+## Rebuild script
 
 ### Show hidden files
-Launch terminal and run:
+Launch any terminal and run:
 
     $ defaults write com.apple.finder AppleShowAllFiles YES; killall Finder
 
-And add file configurations to `$HOME`:
+### Development environment
+If a Bourne-shell (`bash`) is installed with `make` utils, execute:
 
-    $ cp -r ./deploy/ $HOME
+    $ make build
 
-### SSH keys
-Either generate key pair `id_rsa` / `id_rsa.pub` via ssh agent:
+And copy configuration files across:
 
-    $ ssh-keygen -t rsa -b 4096 -C "label"
-    $ eval "$(ssh-agent -s)"
-    $ ssh-add -K ~/.ssh/id_rsa
+    $ make install
 
-Or copy over existing keys:
-
-	$ chmod 400 id_rsa
-	$ chmod 400 id_rsa.pub
-
-## Package manager
+## Manual installation
 
 ### Install [Homebrew](http://brew.sh/#install/)
 Launch terminal and execute:
-	
-	$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+	$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+> with the latest Homebrew version (2.2.2),
+- Apple's Xcode will be downloaded automatically,
+- once the bootstrap script has installed the `brew` executable,
+- while the `core` and `cask` taps are installed by default.
 
 In `$PATH`, make sure `/usr/local/bin` is before `/usr/bin`:
 
-```sh
+```bash
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 ```
 
-### Library dependencies
-
-    $ brew update
-    $ brew upgrade
-    $ brew install coreutils wget git
-
-## Custom shell
-
 ### Install [Zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
-Install via Homebrew,
+With *Homebrew* setup as the default package manager:
 
-    $ brew install zsh zsh-completions
+    $ brew install zsh
 
-Add into allowed shells and make `zsh` as defaut:
+> with MacOS Catalina,
+- Apple base shell has been switched to the Z-shell.
+
+Allow system to access the shell and make *Z-shell* the defaut shell:
 
     $ sudo echo $(which zsh) > /etc/shells
     $ chsh -s $(which zsh)
 
-To switch back to `bash`,
+In order to switch back to the *Bourne-shell*:
 
     $ chsh -s $(which bash)
 
@@ -63,119 +56,83 @@ Launch terminal and execute:
 
     $ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
-
-## Python2 / Python3
-
-### Install C compilers
-Either `gcc` with Homebrew:
-
-    $ brew install gcc
-
-Or `xcode` command line tools:
-
-    $ xcode-select --install
-
-Or lastly [Xcode](https://developer.apple.com/xcode/) app from the Apple store.
-
-### Install Python
-Use Homebrew to install `Python2`:
-
-	$ brew install python
-
-To [override MacOS](https://docs.brew.sh/Homebrew-and-Python.html) Python exec,
-append `$PATH` such as:
-
-```sh
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
-```
-
-Use Homebrew to install `Python3`:
-
-	$ brew install python3
-
-### Install Pip and Virtualenv
-Force update `pip` to latest version:
-
-    $ python3 -m pip3 install -U --force-reinstall pip
-    $ python2 -m pip2 install -U --force-reinstall pip
-
-Now install `virtualenv` and `virtualenvwrapper` globally:
-
-	$ pip2 install -U virtualenv virtualenvwrapper
-	$ pip3 install -U virtualenv virtualenvwrapper
-	$ makedir -p $HOME/.pyenv
-
 ### Install [Pyenv](https://github.com/pyenv/pyenv-virtualenvwrapper)
-To get Pyenv installed:
+To get *Pyenv* installed:
 
 	$ brew install pyenv pyenv-virtualenvwrapper
 
-And make sure to add the following into your `~/.zshrc` or `~/.bash_profile`:
+And make sure to add the following into your `~/.zshrc`:
 
-```sh
+```bash
 # Pyenv
 eval "$(pyenv init -)"
-# Virtualenvwrapper
-export WORKON_HOME=$HOME/.pyenv
-# Via pyenv-virtualenvwrapper
+# Pyenv-virtualenvwrapper
+export WORKON_HOME=${HOME}/.pyenv
 eval "pyenv virtualenvwrapper"
 ```
 
-## Ruby
-
 ### Install [Rbenv](https://github.com/rbenv/rbenv)
-To get Rbenv installed:
+To get *Rbenv* installed:
 
     $ brew install rbenv
 
-And make sure to add the following into your `~/.zshrc` or `~/.bash_profile`:
+And make sure to add the following into your `~/.zshrc`:
 
-```sh
+```bash
 # Rbenv
 eval "$(rbenv init -)"
 ```
 
-## Databases
+# Lastly... cheatsheet! #
 
-### PostgreSQL specificities
-Install [PostgreSQL](https://www.postgresql.org/download/macosx) via the MAC installer.
+### Generate SSH keys
+Either generate key pair `id_rsa` / `id_rsa.pub` via *ssh agent*:
 
-And add its executables to the `$PATH` by adding the following to your `~/.bash_profile`:
+    $ ssh-keygen -t rsa -b 4096 -C "label"
+    $ eval "$(ssh-agent -s)"
+    $ ssh-add -K ~/.ssh/id_rsa
 
-```sh
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-```
+Or copy-over existing keys:
 
-
-# Lastly... cheatsheet!
+	$ chmod 400 id_rsa
+	$ chmod 400 id_rsa.pub
 
 ### Autoreload iPython shell
-Install iPython and create a config file,
+Install *iPython* in a Python virtual environment and generate a profile,
 
     $ ipython profile create
 
-Then edit `~/.config/ipython/profile_default/ipython_config.py` and add,
+Then amend the configuration file (found at `~/.ipython/profile_default/`)
+
+### Django Shell_plus for PyCharm
+Enable Django support in **Languages & Frameworks > Django**,
+
+Then add the the following starting script in **Build, Execution, Deployment > Django Console**,
 
 ```python
-c.InteractiveShellApp.extensions = ['autoreload']
-c.InteractiveShellApp.exec_lines = ['%autoreload 2']
-c.InteractiveShellApp.exec_lines.append(
-    'print("Warning: disable autoreload to improve performance.")'
+import sys
+
+print(f"Python {sys.version} on {sys.platform}")
+sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])
+
+import django
+
+print(f"Django {django.get_version()}")
+if 'setup' in dir(django):
+    django.setup()
+
+import django_manage_shell
+
+django_manage_shell.run(PROJECT_ROOT)
+
+from django_extensions.management.shells import import_objects
+from django.core.management.color import no_style
+
+globals().update(
+    import_objects({"dont_load": [], "quiet_load": False}, no_style())
 )
 ```
 
-### Django Shell_plus extension into PyCharm
-Enable Django support in Languages & Frameworks > Django,
+# Sources #
 
-Then add the the following starting script in Build, Execution, Deployment > Django Console,
-
-```python
-import sys; print('Python %s on %s' % (sys.version, sys.platform))
-import django; print('Django %s' % django.get_version())
-sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])
-if 'setup' in dir(django): django.setup()
-import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)
-from django_extensions.management.shells import import_objects
-from django.core.management.color import no_style
-globals().update(import_objects({"dont_load":[], "quiet_load":False},no_style()))
-```
+https://gist.github.com/codeinthehole/7892be95ad152b621f3b62a6a3df0fc9
