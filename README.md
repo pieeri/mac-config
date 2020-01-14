@@ -1,25 +1,5 @@
 # Global Mac Setup
 
-## Downloads
-
-### Engineering
-- [Sublime3](https://www.sublimetext.com/3)
-- [PyCharm](https://www.jetbrains.com/toolbox/app)
-- [MySQLWorkBench](https://dev.mysql.com/downloads/workbench)
-- [pgAdmin](https://www.pgadmin.org/download)
-- [Filezilla](https://filezilla-project.org/download.php?type=client)
-- [Docker](https://docs.docker.com/docker-for-mac)
-- [Postman](https://www.getpostman.com)
-
-### Productivity
-- [1Password](https://1password.com/downloads)
-- [Slack](https://slack.com/downloads/osx)
-- [Dropbox](https://www.dropbox.com/downloading)
-- [TunnelBear](https://www.tunnelbear.com/download)
-- [f.lux](https://justgetflux.com)
-- [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
-with extensions: AdBlock, Ghostery, DuckDuckGo, JSONView, JetBrain, 1Password, Hunter
-
 ## Mac configuration
 
 ### Show hidden files
@@ -83,24 +63,6 @@ Launch terminal and execute:
 
     $ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
-## Custom text editor
-
-### Symlink [subl exec](http://www.sublimetext.com/docs/3/osx_command_line.html)
-Launch terminal and run:
-
-    $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-
-Make custom exec into `/usr/local/bin`:
-
-    $ cp ./subl_wait /usr/local/bin/subl_wait
-    $ chmod +x /usr/local/bin/subl_wait
-
-### Install packages
-- [PackageControl](https://packagecontrol.io/installation#st3)
-- [Anaconda](http://damnwidget.github.io/anaconda)
-- [Orgmode](https://packagecontrol.io/packages/orgmode)
-- [Docker](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting)
-
 
 ## Python2 / Python3
 
@@ -159,23 +121,6 @@ export WORKON_HOME=$HOME/.pyenv
 eval "pyenv virtualenvwrapper"
 ```
 
-### Install [Pipenv](https://github.com/pypa/pipenv)
-To get Pipenv installed:
-
-    $ brew install pipenv
-
-And make sure to add the following into your `~/.zshrc` or `~/.bash_profile`:
-
-```sh
-# Pipenv
-eval "$(pipenv --completion)"
-```
-
-### Other dependencies for PyPi packages
-
-	$ brew install qt4 pyqt zmq libyaml
-
-
 ## Ruby
 
 ### Install [Rbenv](https://github.com/rbenv/rbenv)
@@ -192,20 +137,6 @@ eval "$(rbenv init -)"
 
 ## Databases
 
-### MySQL specificities
-Install MySQL via Homebrew:
-
-	$ brew install mysql
-
-And initialize the local MySQL server as well as an initial Db:
-
-	$ unset TMPDIR
-	$ mysqld -initialize --verbose --user=whoami --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-	
-Add-hoc launch of MySQL server:
-
-    $ mysql.server start
-
 ### PostgreSQL specificities
 Install [PostgreSQL](https://www.postgresql.org/download/macosx) via the MAC installer.
 
@@ -215,50 +146,8 @@ And add its executables to the `$PATH` by adding the following to your `~/.bash_
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 ```
 
-Start Postgres and initialise through the GUI.
 
 # Lastly... cheatsheet!
-
-### Remove Homebrew packages
-To remove a package and all of its dependencies recursively,
-
-    $ brew tap ggpeti/rmrec
-    $ brew rmrec <pkgname>
-
-### CLI for FTP/Telnet servers
-[FTP CLI](https://docs.oracle.com/cd/E19120-01/open.solaris/819-1634/remotehowtoaccess-87541/index.html) removed on High Sierral,
-
-    $ brew install inetutils
-
-### Tmux CLI
-To detach remote SSH connections from active terminal window (and avoid broken pipes),
-
-    $ brew install tmux
-
-Bespoke config file `.tmux.conf` into `$HOME` directory:
-
-* remap prefix from 'C-b' to 'C-a'
-* start window numbering at 1
-
-### Reset distribution packages
-Reset Python distributions globally,
-
-    $ pip install pip-tools
-    $ pip-sync ./requirements.txt
-
-### Create a virtualenv via Pyenv
-Install Python3.6.1 distribution via Pyenv,
-
-    $ pyenv install 3.6.1
-    $ pyenv global 3.6.1
-    $ pip install virtualenv virtualenvwrapper
-    $ mkvirtualenvwrapper Test
-
-Install Anaconda3 distribution via Pyenv,
-
-    $ pyenv install anaconda3-5.0.0
-    $ pyenv global anaconda3-5.0.0
-    $ conda list
 
 ### Autoreload iPython shell
 Install iPython and create a config file,
@@ -290,9 +179,3 @@ from django_extensions.management.shells import import_objects
 from django.core.management.color import no_style
 globals().update(import_objects({"dont_load":[], "quiet_load":False},no_style()))
 ```
-
-### Install Vagrant via HomeBrew
-To install Virtualbox and Vagrant through Homebrew,
-
-    $ brew cask install virtualbox
-    $ brew cask install vagrant

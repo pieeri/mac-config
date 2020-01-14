@@ -1,4 +1,7 @@
-# Mac OS
+# IDE
+.vscode
+
+# MacOS
 .DS_Store
 .localized
-.idea
+*~
