@@ -34,6 +34,7 @@ GNUS=(
     gettext
     htop
     httpie
+    jq
     watch
     wget
 )
@@ -98,6 +99,7 @@ CSKS=(
     openoffice
     postgres
     postman
+    pycharm-edu
     slack
     tower
     visual-studio-code
@@ -142,6 +144,7 @@ DEV=(
     awscli
     kubectl
     helm
+    jsonnet
     minikube
     terraform
     aws-iam-authenticator
