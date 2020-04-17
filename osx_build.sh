@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
-echo "Starting build!"
+echo "$(date): starting build..."
 
+# Exit if a command exits with a non-zero status
 set -e
+
+# Print commands as they are executed
+set -x
 
 
 # --------
 # Homebrew
 # --------
 
-echo "Installing homebrew..."
+echo "$(date): installing homebrew..."
 
 # Check for Homebrew, install if necessary
 if test ! $(which brew); then
@@ -25,7 +29,7 @@ brew update
 # GNU command line tools
 # ----------------------
 
-echo "Installing GNU utils..."
+echo "$(date): installing GNU utils..."
 
 ## Other GNU utilities
 GNUS=(
@@ -45,13 +49,13 @@ brew install ${GNUS[@]}
 # Bourne shells
 # -------------
 
-echo "Installing Z shell..."
+echo "$(date): installing Z shell..."
 
 # Z shell
 ZSHS=(
     zsh
 )
-brew ${ZSHS[@]}
+brew install ${ZSHS[@]}
 
 # Check for shell, change if necessary
 if test ! $(echo $0 | grep zsh); then
@@ -71,14 +75,13 @@ fi
 # Core dev packages
 # -----------------
 
-echo "Installing packages..."
+echo "$(date): installing packages..."
 
 PKGS=(
-    git
-    libyaml
-    tmux
     # Binary build
     gcc
+    git
+    libyaml
 )
 brew install ${PKGS[@]}
 
@@ -87,7 +90,7 @@ brew install ${PKGS[@]}
 # Core dev apps
 # -------------
 
-echo "Installing applications..."
+echo "$(date): installing applications..."
 
 # Install cask apps
 CSKS=(
@@ -99,7 +102,7 @@ CSKS=(
     openoffice
     postgres
     postman
-    pycharm-edu
+    pycharm-ce
     slack
     tower
     visual-studio-code
@@ -111,7 +114,7 @@ brew cask install ${CSKS[@]}
 # Python
 # ------
 
-echo "Installing Python ecosystem..."
+echo "$(date): installing Python ecosystem..."
 
 # Install python bins
 PYS=(
@@ -124,36 +127,38 @@ if test ! -d $HOME/.pyenv; then
     makedir -p $HOME/.pyenv
 fi
 
-ENVS=(
+VENVS=(
+    pipenv
     pyenv
     pyenv-virtualenvwrapper
-    pipenv
 )
-brew install ${ENVS[@]}
+brew install ${VENVS[@]}
 
 
 # ------
 # Devops
 # ------
 
-echo "Installing DevOps ecosystem..."
+echo "$(date): installing DevOps ecosystem..."
 
 # Install python bins
-DEV=(
-    pgcli
+DEVOPS=(
+    aws-iam-authenticator
     awscli
-    kubectl
     helm
     jsonnet
+    kubernetes-cli
     minikube
+    pgcli
     terraform
-    aws-iam-authenticator
+    tflint
+    tmux
 )
-brew install ${DEV[@]}
+brew install ${DEVOPS[@]}
 
 
-echo "Cleaning up..."
+echo "$(date): cleaning up..."
 brew cleanup
 brew doctor
 
-echo "Build complete"
+echo "$(date): build complete!"
