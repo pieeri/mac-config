@@ -35,9 +35,11 @@ echo "$(date): installing GNU utils..."
 GNUS=(
     # coreutils
     # findutils
+    bat
     gettext
     htop
     httpie
+    hub
     jq
     watch
     wget
