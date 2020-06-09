@@ -4,7 +4,7 @@ ZSH_THEME="fishy"
 ## Plugins
 ### For zsh-syntax-highlighting,
 ### https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
-plugins=(osx git aws docker docker-compose kubectl helm tmux zsh-syntax-highlighting)
+plugins=(osx git aws docker docker-compose kubectl kube-ps1 helm tmux zsh-syntax-highlighting)
 ## Install
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -37,5 +37,8 @@ eval "pyenv virtualenvwrapper"
 # EDITOR
 export EDITOR="code"
 alias c="code"
+
+# PROMPT
+PROMPT='$(kube_ps1)'$PROMPT
 
 echo "$(whoami): customed shell successfully loaded!"
