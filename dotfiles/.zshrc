@@ -14,6 +14,26 @@ cat /dev/null > $HOME/.zsh_history
 alias zsh-config="code ${HOME}/.zshrc"
 alias zsh-reload="exec zsh"
 
+# PYTHON
+## Pyenv
+eval "$(pyenv init -)"
+## Virtualenvwrapper
+export WORKON_HOME=$HOME/.pyenv
+eval "pyenv virtualenvwrapper"
+
+# GOLANG
+export GOPATH=$HOME/Checkouts/go
+
+# NODE
+export NVM_DIR=$HOME/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# ENV
+set -a
+
+# PROMPT
+PROMPT='$(kube_ps1)'$PROMPT
+
 # PATH
 path=(
 ## HOMEBREW
@@ -25,20 +45,22 @@ path=(
     /usr/local/opt/gettext/bin
 ## POSTGRES
     /Applications/Postgres.app/Contents/Versions/latest/bin
+## GO
+    $GOPATH/bin
 )
-
-# PYTHON
-## Pyenv
-eval "$(pyenv init -)"
-## Virtualenvwrapper
-export WORKON_HOME=$HOME/.pyenv
-eval "pyenv virtualenvwrapper"
 
 # EDITOR
 export EDITOR="code"
 alias c="code"
 
-# PROMPT
-PROMPT='$(kube_ps1)'$PROMPT
+# NOOS
+_complete_noosci() {
+    collection_arg=''
+    if [[ "${words}" =~ "(-c|--collection) [^ ]+" ]]; then
+        collection_arg=$MATCH
+    fi
+    reply=( $(noosci ${=collection_arg} --complete -- ${words}) )
+}
+compctl -K _complete_noosci + -f noosci
 
 echo "$(whoami): customed shell successfully loaded!"
