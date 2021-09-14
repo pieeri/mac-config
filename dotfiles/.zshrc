@@ -16,6 +16,7 @@ alias zsh-reload="exec zsh"
 
 # PYTHON
 ## Pyenv
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 ## Virtualenvwrapper
 export WORKON_HOME=$HOME/.pyenv
