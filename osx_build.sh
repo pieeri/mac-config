@@ -31,15 +31,13 @@ brew update
 
 echo "$(date): installing GNU utils..."
 
-## Other GNU utilities
+# Other GNU utilities
 GNUS=(
-    # coreutils
-    # findutils
     bat
     gettext
+    grep
     htop
     httpie
-    hub
     jq
     watch
     wget
@@ -81,9 +79,12 @@ echo "$(date): installing packages..."
 
 PKGS=(
     # Binary build
-    gcc
+    cmake
+    geckodriver
     git
     libyaml
+    pgcli
+    sqlite
 )
 brew install ${PKGS[@]}
 
@@ -96,17 +97,18 @@ echo "$(date): installing applications..."
 
 # Install cask apps
 CSKS=(
+    1password-cli
+    chromedriver
     cyberduck
+    dbeaver-community
     docker
     flux
+    gitkraken
     iterm2
-    joplin
-    openoffice
+    orbstack
     postgres
     postman
-    pycharm-ce
     slack
-    tower
     visual-studio-code
 )
 brew cask install ${CSKS[@]}
@@ -121,6 +123,7 @@ echo "$(date): installing Python ecosystem..."
 # Install python bins
 PYS=(
     python
+    pyenv
 )
 brew install ${PYS[@]}
 
@@ -128,13 +131,6 @@ brew install ${PYS[@]}
 if test ! -d $HOME/.pyenv; then
     makedir -p $HOME/.pyenv
 fi
-
-VENVS=(
-    pipenv
-    pyenv
-    pyenv-virtualenvwrapper
-)
-brew install ${VENVS[@]}
 
 
 # ------
@@ -145,16 +141,13 @@ echo "$(date): installing DevOps ecosystem..."
 
 # Install python bins
 DEVOPS=(
-    aws-iam-authenticator
+    argo
     awscli
+    circleci
     helm
-    jsonnet
+    k9s
     kubernetes-cli
-    minikube
-    pgcli
     terraform
-    tflint
-    tmux
 )
 brew install ${DEVOPS[@]}
 
