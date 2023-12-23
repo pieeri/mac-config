@@ -4,7 +4,7 @@ ZSH_THEME="fishy"
 ## Plugins
 ### For zsh-syntax-highlighting,
 ### https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
-plugins=(macos git aws docker docker-compose kubectl kube-ps1 helm tmux zsh-syntax-highlighting)
+plugins=(macos git aws docker docker-compose kubectl helm zsh-syntax-highlighting)
 ## Automatic Oh-My-Zsh updates
 zstyle ':omz:update' mode auto
 ## Install
@@ -18,22 +18,25 @@ cat /dev/null > $HOME/.zsh_history
 alias zsh-config="code ${HOME}/.zshrc"
 alias zsh-reload="omz reload"
 
-# GOLANG
-export GOPATH=$HOME/Checkouts/go
+# EDITOR
+export EDITOR="code -w"
+alias c="code"
+
+# PYTHON
+## Pyenv
+export PYENV_ROOT=$HOME/.pyenv
+eval "$(pyenv init -)"
+## Default settings
+export PIPENV_VENV_IN_PROJECT=true
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+export PYTHONBREAKPOINT=ipdb.set_trace
 
 # NODE
 export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-# PYTHON
-## Pyenv
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-## Virtualenvwrapper
-export WORKON_HOME=$HOME/.pyenv
-eval "pyenv virtualenvwrapper"
-## Default debugger
-export PYTHONBREAKPOINT=ipdb.set_trace
+# GOLANG
+export GOPATH=$HOME/Checkouts/go
 
 # PATH
 path=(
@@ -48,21 +51,10 @@ path=(
     /Applications/Postgres.app/Contents/Versions/latest/bin
 ## GO
     $GOPATH/bin
-## POETRY
-    $HOME/.poetry/bin
-## KREW
-    $HOME/.krew/bin
 )
 
 # ENV
 set -a
-
-# EDITOR
-export EDITOR="code -w"
-alias c="code"
-
-# PROMPT
-PROMPT='$(kube_ps1)'$PROMPT
 
 # NOOS
 _complete_noosinv() {
