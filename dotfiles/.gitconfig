@@ -3,9 +3,14 @@
 	email =
 [credential]
 	helper = osxkeychain
+# Enforce SSH
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [branch]
 	autosetuprebase = always
 [push]
 	default = simple
 [commit]
 	template = ~/.gitcommit.txt
+[core]
+  editor = code --wait
