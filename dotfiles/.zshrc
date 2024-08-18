@@ -1,26 +1,47 @@
 # ZSH
-## Theme
-ZSH_THEME="fishy"
-## Plugins
-### For zsh-syntax-highlighting,
-### https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
-plugins=(macos git aws docker docker-compose kubectl helm zsh-syntax-highlighting)
 ## Automatic Oh-My-Zsh updates
 zstyle ':omz:update' mode auto
+## Plugins
+plugins=(
+    macos
+    # dotenv
+    git
+    aws
+    docker
+    docker-compose
+    kubectl
+    helm
+    # For zsh-syntax-highlighting,
+    # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh
+    zsh-syntax-highlighting
+)
+## Theme
+ZSH_THEME="fishy"
+## Settings
+ENABLE_CORRECTION="true"
 ## Install
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-## Settings
-ENABLE_CORRECTION="true"
 ## Session history
 cat /dev/null > $HOME/.zsh_history
 ## Aliases
 alias zsh-config="code ${HOME}/.zshrc"
 alias zsh-reload="omz reload"
 
+# XDG DIRECTORY
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+
 # EDITOR
 export EDITOR="code -w"
 alias c="code"
+set -a
+
+# RUST
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+export CARGO_HOME=$XDG_DATA_HOME/cargo
 
 # PYTHON
 ## Pyenv
@@ -35,26 +56,20 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-# GOLANG
-export GOPATH=$HOME/Checkouts/go
-
 # PATH
 path=(
-## HOMEBREW
+    # Homebrew
     /usr/local/bin
     /usr/local/sbin
-## OSX
-    $path
-## GNU
+    # GNU
     /usr/local/opt/gettext/bin
-## POSTGRES
+    # Rust
+    $CARGO_HOME/bin
+    # Postgres
     /Applications/Postgres.app/Contents/Versions/latest/bin
-## GO
-    $GOPATH/bin
+    # OSX
+    $path
 )
-
-# ENV
-set -a
 
 # NOOS
 _complete_noosinv() {
@@ -66,5 +81,5 @@ _complete_noosinv() {
 }
 compctl -K _complete_noosinv + -f noosinv
 
-# Setup complete!
+# TEARDOWN
 echo "$(whoami): customed shell successfully loaded!"
