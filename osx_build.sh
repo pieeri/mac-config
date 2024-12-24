@@ -17,7 +17,7 @@ echo "$(date): installing homebrew..."
 
 # Check for Homebrew, install if necessary
 if test ! $(which brew); then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
@@ -66,7 +66,7 @@ fi
 
 # Check for Oh-My-Zsh, install if necessary
 if test ! -d $HOME/.oh-my-zsh; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
