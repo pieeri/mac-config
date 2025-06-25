@@ -1,10 +1,9 @@
-# ZSH
+# OH-MY-ZSH
 ## Automatic Oh-My-Zsh updates
 zstyle ':omz:update' mode auto
 ## Plugins
 plugins=(
     macos
-    # dotenv
     git
     aws
     docker
@@ -37,20 +36,22 @@ export XDG_CACHE_HOME=$HOME/.cache
 # EDITOR
 export EDITOR="code -w"
 alias c="code"
-set -a
-
-# RUST
-export RUSTUP_HOME=$XDG_DATA_HOME/rustup
-export CARGO_HOME=$XDG_DATA_HOME/cargo
+alias cu="cursor"
+alias setenv="set -a && source .env"
+alias unsetenv="set +a"
 
 # PYTHON
 ## Pyenv
 export PYENV_ROOT=$HOME/.pyenv
-eval "$(pyenv init -)"
+eval "$(pyenv init - zsh)"
 ## Default settings
 export PIPENV_VENV_IN_PROJECT=true
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+# RUST
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+export CARGO_HOME=$XDG_DATA_HOME/cargo
 
 # NODE
 export NVM_DIR=$HOME/.nvm
@@ -58,20 +59,14 @@ source $(brew --prefix nvm)/nvm.sh
 
 # PATH
 path=(
-    # Homebrew
-    /usr/local/bin
-    /usr/local/sbin
-    # GNU
-    /usr/local/opt/gettext/bin
     # Rust
     $CARGO_HOME/bin
-    # Postgres
-    /Applications/Postgres.app/Contents/Versions/latest/bin
     # OSX
     $path
 )
 
 # NOOS
+export NOOSINV_LOCAL_CONFIG=$HOME/.noos/config.json
 _complete_noosinv() {
     collection_arg=''
     if [[ "${words}" =~ "(-c|--collection) [^ ]+" ]]; then
@@ -80,6 +75,7 @@ _complete_noosinv() {
     reply=( $(noosinv ${=collection_arg} --complete -- ${words}) )
 }
 compctl -K _complete_noosinv + -f noosinv
+alias nooslint="noosinv python.format && noosinv python.lint"
 
 # TEARDOWN
 echo "$(whoami): customed shell successfully loaded!"
